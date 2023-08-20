@@ -19,8 +19,9 @@ public class ClubList {
     private Long id;
     @Column(nullable = false, name = "uuid")
     private String uuid;
-    @Column(nullable = false, name = "reg_date")
-    private LocalDate regDate;
+//    //todo: reg_date 제거해야하는지 추후 체크. BaseEntity 활용법 확인하기.
+//    @Column(nullable = false, name = "reg_date")
+//    private LocalDate regDate;
     @ManyToOne(fetch = FetchType.LAZY)
     private BizClub bizClub;
 }
