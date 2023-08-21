@@ -1,4 +1,4 @@
-package ssgssak.ssgpointappclub.club.application;
+package ssgssak.ssgpointappclub.domain.club.application;
 
 public interface ClubService<Dto> {
     void createClubUser(Dto clubDto, String uuid);
