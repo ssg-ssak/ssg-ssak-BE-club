@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import ssgssak.ssgpointappclub.club.dto.BizClubDto;
+import ssgssak.ssgpointappclub.club.vo.BizClubInputVo;
 
 @Entity
 @Getter
@@ -27,4 +29,14 @@ public class BizClub {
     private String companyEmail;
     @Column(nullable = false, name = "agreement")
     private Boolean agreement;
+
+    public BizClub updateClub(BizClubDto dto) {
+        this.companyName = dto.getCompanyName();
+        this.companyNumber = dto.getCompanyNumber();
+        this.companyLeaderName = dto.getCompanyLeaderName();
+        this.companyAddress = dto.getCompanyAddress();
+        this.companyEmail = dto.getCompanyEmail();
+        this.agreement = dto.getAgreement();
+        return this;
+    }
 }

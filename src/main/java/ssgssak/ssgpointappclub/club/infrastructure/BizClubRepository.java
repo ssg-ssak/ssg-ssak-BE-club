@@ -9,5 +9,5 @@ public interface BizClubRepository extends JpaRepository<BizClub, Long> {
     /**
     delete, save는 JpaRepository에서 제공되기 때문에 find만 구현.
      */
-    BizClub findByuuid(String uuid);
+//    BizClub findById(Long id);
 }
