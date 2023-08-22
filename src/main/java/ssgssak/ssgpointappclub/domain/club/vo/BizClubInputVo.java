@@ -1,15 +1,15 @@
-package ssgssak.ssgpointappclub.club.vo;
+package ssgssak.ssgpointappclub.domain.club.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BizClubOutputVo {
+public class BizClubInputVo {
     private String companyName;
     private String companyNumber;
     private String companyLeaderName;

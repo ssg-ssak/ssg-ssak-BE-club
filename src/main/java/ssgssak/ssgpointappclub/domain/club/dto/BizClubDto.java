@@ -1,15 +1,13 @@
-package ssgssak.ssgpointappclub.club.vo;
+package ssgssak.ssgpointappclub.domain.club.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Getter
 @Builder
-@NoArgsConstructor
+@Getter
+@ToString
 @AllArgsConstructor
-public class BizClubInputVo {
+@NoArgsConstructor
+public class BizClubDto {
     private String companyName;
     private String companyNumber;
     private String companyLeaderName;

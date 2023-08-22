@@ -1,12 +1,7 @@
-package ssgssak.ssgpointappclub.club.entity;
+package ssgssak.ssgpointappclub.domain.club.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import java.time.LocalDate;
+import lombok.*;
 
 @Entity
 @Getter
@@ -24,4 +19,16 @@ public class ClubList {
 //    private LocalDate regDate;
     @ManyToOne(fetch = FetchType.LAZY)
     private BizClub bizClub;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private MomClub momClub;
+
+    // 비즈니스 클럽 정보 수정
+    public void updateBizClubInfo(BizClub bizClub){
+        this.bizClub = bizClub;
+    }
+
+    // 맘키즈 클럽 정보 수정
+    public void updateMomClubInfo(MomClub momClub){
+        this.momClub = momClub;
+    }
 }

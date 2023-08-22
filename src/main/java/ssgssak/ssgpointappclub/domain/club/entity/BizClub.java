@@ -1,16 +1,14 @@
-package ssgssak.ssgpointappclub.club.entity;
+package ssgssak.ssgpointappclub.domain.club.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import ssgssak.ssgpointappclub.club.dto.BizClubDto;
-import ssgssak.ssgpointappclub.club.vo.BizClubInputVo;
 
 @Entity
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class BizClub {
@@ -30,13 +28,22 @@ public class BizClub {
     @Column(nullable = false, name = "agreement")
     private Boolean agreement;
 
-    public BizClub updateClub(BizClubDto dto) {
-        this.companyName = dto.getCompanyName();
-        this.companyNumber = dto.getCompanyNumber();
-        this.companyLeaderName = dto.getCompanyLeaderName();
-        this.companyAddress = dto.getCompanyAddress();
-        this.companyEmail = dto.getCompanyEmail();
-        this.agreement = dto.getAgreement();
-        return this;
+    public void updateCompanyName(String companyName){
+        this.companyName = companyName;
+    }
+    public void updateCompanyNumber(String companyNumber){
+        this.companyNumber = companyNumber;
+    }
+    public void updateCompanyLeaderName(String CompanyLeaderName){
+        this.companyLeaderName = companyLeaderName;
+    }
+    public void updateCompanyAddress(String companyAddress){
+        this.companyAddress = companyAddress;
+    }
+    public void updateCompanyEmail(String companyEmail){
+        this.companyEmail = companyEmail;
+    }
+    public void updateAgreement(Boolean agreement){
+        this.agreement = agreement;
     }
 }
