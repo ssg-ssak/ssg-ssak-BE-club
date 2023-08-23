@@ -30,29 +30,12 @@ public class BizClubServiceImpl implements ClubService<BizClubDto> {
                 .agreement(createDto.getAgreement())
                 .build();
         bizClubRepository.save(bizClub);
-        // 기존 clubList 데이터 존재 시, null인 bizClub필드를 업데이트
-        //todo: 테스트위해 남겨둠. 추후에 삭제
-        if(clubListRepository.findByUuid(uuid) != null){
-            ClubList clubList = clubListRepository.findByUuid(uuid);
-            clubList.updateBizClubInfo(bizClub);
-            clubListRepository.save(clubList);
-        }
-        // 기존 clubList 존재하지 않을 시, 새로 생성
-        else {
-            ClubList clubList = ClubList.builder()
-                    .uuid(uuid)
-                    .bizClub(bizClub)
-                    .build();
-            clubListRepository.save(clubList);
-        }
         /*
-        유저 생성 시에 clubList가 자동으로 생성되는 기능 완성시에 사용.
+        clubList의 BizClub필드에 생성한 bizClub 추가
          */
-//        ClubList clubList = clubListRepository.findByUuid(uuid);
-//        if(clubList.getBizClub() == null){
-//            clubList.updateBizClubInfo(bizClub);
-//            clubListRepository.save(clubList);
-//        }
+        ClubList clubList = clubListRepository.findByUuid(uuid);
+        clubList.updateBizClubInfo(bizClub);
+        clubListRepository.save(clubList);
     }
     @Override
     public BizClubDto getClubUser(String uuid) {

@@ -49,29 +49,11 @@ public class MomClubServiceImpl implements ClubService<MomClubDto>{
         }
         momClubRepository.save(momClub);
         /*
-        uuid값을 지니는 ClubList 데이터의 존재 유무 확인
+        clubList의 MomClub필드에 생성한 momClub 추가
          */
-        //todo: 테스트 위해 남겨둠. 추후에 삭제.
-        if(clubListRepository.findByUuid(uuid) != null){
-            ClubList clubList = clubListRepository.findByUuid(uuid);
-            clubList.updateMomClubInfo(momClub);
-            clubListRepository.save(clubList);
-        }
-        else {
-            ClubList clubList = ClubList.builder()
-                    .uuid(uuid)
-                    .momClub(momClub)
-                    .build();
-            clubListRepository.save(clubList);
-        }
-        /*
-        유저 생성 시에 clubList가 자동으로 생성되는 기능 완성시에 사용.
-         */
-//        ClubList clubList = clubListRepository.findByUuid(uuid);
-//        if(clubList.getMomClub() == null){
-//            clubList.updateMomClubInfo(momClub);
-//            clubListRepository.save(clubList);
-//        }
+        ClubList clubList = clubListRepository.findByUuid(uuid);
+        clubList.updateMomClubInfo(momClub);
+        clubListRepository.save(clubList);
     }
     @Override
     public MomClubDto getClubUser(String uuid) {

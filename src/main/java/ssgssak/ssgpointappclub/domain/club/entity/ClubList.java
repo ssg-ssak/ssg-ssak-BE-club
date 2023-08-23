@@ -2,6 +2,7 @@ package ssgssak.ssgpointappclub.domain.club.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import ssgssak.ssgpointappclub.domain.club.dto.CarClubDto;
 
 @Entity
 @Getter
@@ -21,6 +22,8 @@ public class ClubList {
     private BizClub bizClub;
     @ManyToOne(fetch = FetchType.LAZY)
     private MomClub momClub;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private CarClub carClub;
 
     // 비즈니스 클럽 정보 수정
     public void updateBizClubInfo(BizClub bizClub){
@@ -30,5 +33,9 @@ public class ClubList {
     // 맘키즈 클럽 정보 수정
     public void updateMomClubInfo(MomClub momClub){
         this.momClub = momClub;
+    }
+
+    public void updateCarClubInfo(CarClub carClub) {
+        this.carClub = carClub;
     }
 }
