@@ -1,10 +1,7 @@
 package ssgssak.ssgpointappclub.domain.club.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
@@ -43,7 +40,7 @@ public class BizClub {
     public void updateCompanyEmail(String companyEmail){
         this.companyEmail = companyEmail;
     }
-    public void updateAgreement(Boolean agreement){
+    public void updateAgreement(Boolean agreement) {
         this.agreement = agreement;
     }
 }

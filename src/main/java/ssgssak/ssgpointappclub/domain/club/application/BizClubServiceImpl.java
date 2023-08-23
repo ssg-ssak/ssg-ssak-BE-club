@@ -1,6 +1,7 @@
 package ssgssak.ssgpointappclub.domain.club.application;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import ssgssak.ssgpointappclub.domain.club.dto.BizClubDto;
 import ssgssak.ssgpointappclub.domain.club.entity.BizClub;
@@ -10,12 +11,13 @@ import ssgssak.ssgpointappclub.domain.club.infrastructure.ClubListRepository;
 
 @Service
 @RequiredArgsConstructor
-public class BizClubServiceImpl implements ClubService<BizClubDto>{
+public class BizClubServiceImpl implements ClubService<BizClubDto> {
     private final BizClubRepository bizClubRepository;
     private final ClubListRepository clubListRepository;
+    private final ModelMapper modelMapper;
 
     /*
-    유저 클럽 가입(약관 동의를 하지 않으면 가입 자체가 불가능하므로 약관 미동의 여부는 고려하지 않는다)
+    유저 클럽 가입
      */
     @Override
     public void createClubUser(BizClubDto createDto, String uuid) {
@@ -29,6 +31,7 @@ public class BizClubServiceImpl implements ClubService<BizClubDto>{
                 .build();
         bizClubRepository.save(bizClub);
         // 기존 clubList 데이터 존재 시, null인 bizClub필드를 업데이트
+        //todo: 테스트위해 남겨둠. 추후에 삭제
         if(clubListRepository.findByUuid(uuid) != null){
             ClubList clubList = clubListRepository.findByUuid(uuid);
             clubList.updateBizClubInfo(bizClub);
@@ -42,6 +45,14 @@ public class BizClubServiceImpl implements ClubService<BizClubDto>{
                     .build();
             clubListRepository.save(clubList);
         }
+        /*
+        유저 생성 시에 clubList가 자동으로 생성되는 기능 완성시에 사용.
+         */
+//        ClubList clubList = clubListRepository.findByUuid(uuid);
+//        if(clubList.getBizClub() == null){
+//            clubList.updateBizClubInfo(bizClub);
+//            clubListRepository.save(clubList);
+//        }
     }
     @Override
     public BizClubDto getClubUser(String uuid) {
@@ -51,14 +62,7 @@ public class BizClubServiceImpl implements ClubService<BizClubDto>{
          */
         BizClub bizClub = bizClubRepository.findById(clubList.getBizClub().getId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 클럽이 존재하지 않습니다."));
-        return BizClubDto.builder()
-                .companyName(bizClub.getCompanyName())
-                .companyNumber(bizClub.getCompanyNumber())
-                .companyLeaderName(bizClub.getCompanyLeaderName())
-                .companyAddress(bizClub.getCompanyAddress())
-                .companyEmail(bizClub.getCompanyEmail())
-                .agreement(bizClub.getAgreement())
-                .build();
+        return modelMapper.map(bizClub, BizClubDto.class);
     }
     @Override
     public void updateClubUser(BizClubDto updateDto, String uuid) {
@@ -81,13 +85,14 @@ public class BizClubServiceImpl implements ClubService<BizClubDto>{
         dto의 동의 필드가 체크일 경우 클럽 정보 업데이트
          */
         else {
-            bizClub.updateCompanyName(updateDto.getCompanyName());
-            bizClub.updateCompanyNumber(updateDto.getCompanyNumber());
-            bizClub.updateCompanyLeaderName(updateDto.getCompanyLeaderName());
-            bizClub.updateCompanyAddress(updateDto.getCompanyAddress());
-            bizClub.updateCompanyEmail(updateDto.getCompanyEmail());
-            bizClub.updateAgreement(updateDto.getAgreement());
-            bizClubRepository.save(bizClub);
+            BizClub updatedBizClub = bizClub.toBuilder()
+                    .companyName(updateDto.getCompanyName())
+                    .companyNumber(updateDto.getCompanyNumber())
+                    .companyLeaderName(updateDto.getCompanyLeaderName())
+                    .companyAddress(updateDto.getCompanyAddress())
+                    .companyEmail(updateDto.getCompanyEmail())
+                    .build();
+            bizClubRepository.save(updatedBizClub);
         }
     }
 }
