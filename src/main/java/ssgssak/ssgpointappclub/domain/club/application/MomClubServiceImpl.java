@@ -1,6 +1,7 @@
 package ssgssak.ssgpointappclub.domain.club.application;
 
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import ssgssak.ssgpointappclub.domain.club.dto.MomClubDto;
 import ssgssak.ssgpointappclub.domain.club.entity.ClubList;
@@ -16,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 public class MomClubServiceImpl implements ClubService<MomClubDto>{
     private final MomClubRepository momClubRepository;
     private final ClubListRepository clubListRepository;
+    private final ModelMapper modelMapper;
 
     // VO에서 받아온 String을 LocalDate로 변환.
     private static final DateTimeFormatter stringToDate = DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -49,6 +51,7 @@ public class MomClubServiceImpl implements ClubService<MomClubDto>{
         /*
         uuid값을 지니는 ClubList 데이터의 존재 유무 확인
          */
+        //todo: 테스트 위해 남겨둠. 추후에 삭제.
         if(clubListRepository.findByUuid(uuid) != null){
             ClubList clubList = clubListRepository.findByUuid(uuid);
             clubList.updateMomClubInfo(momClub);
@@ -61,6 +64,14 @@ public class MomClubServiceImpl implements ClubService<MomClubDto>{
                     .build();
             clubListRepository.save(clubList);
         }
+        /*
+        유저 생성 시에 clubList가 자동으로 생성되는 기능 완성시에 사용.
+         */
+//        ClubList clubList = clubListRepository.findByUuid(uuid);
+//        if(clubList.getMomClub() == null){
+//            clubList.updateMomClubInfo(momClub);
+//            clubListRepository.save(clubList);
+//        }
     }
     @Override
     public MomClubDto getClubUser(String uuid) {
@@ -71,13 +82,7 @@ public class MomClubServiceImpl implements ClubService<MomClubDto>{
         MomClub momClub = momClubRepository.findById(
                         (clubList.getMomClub()).getId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 클럽이 존재하지 않습니다."));
-        return MomClubDto.builder()
-                .child1Gender(momClub.getChild1Gender())
-                .child1Birth(String.valueOf(momClub.getChild1Birth()))
-                .child2Gender(momClub.getChild2Gender())
-                .child2Birth(String.valueOf(momClub.getChild2Birth()))
-                .agreement(momClub.getAgreement())
-                .build();
+        return modelMapper.map(momClub, MomClubDto.class);
     }
 
     @Override
