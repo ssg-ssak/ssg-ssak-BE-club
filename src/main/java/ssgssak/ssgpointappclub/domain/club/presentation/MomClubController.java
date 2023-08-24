@@ -18,11 +18,14 @@ import ssgssak.ssgpointappclub.domain.club.vo.MomClubOutputVo;
 public class MomClubController {
     private final MomClubServiceImpl momClubService;
     private final ModelMapper modelMapper;
+    // 맘키즈 클럽 가입
     @PostMapping("/{uuid}")
     public void createClubUser(@RequestBody MomClubInputVo momClubInputVo, @PathVariable String uuid){
+        log.info("INPUT Object Data is : {}" , momClubInputVo);
         MomClubDto momClubDto = modelMapper.map(momClubInputVo, MomClubDto.class);
         momClubService.createClubUser(momClubDto, uuid);
     }
+    // 맘키즈 클럽 정보 불러오기
     @GetMapping("/{uuid}")
     public ResponseEntity<MomClubOutputVo> getClubUser(@PathVariable String uuid){
         log.info("INPUT uuid is : {}", uuid);
@@ -32,8 +35,10 @@ public class MomClubController {
         log.info("OUTPUT momClubOutputVo is : {}", momClubOutputVo);
         return new ResponseEntity<>(momClubOutputVo, HttpStatus.OK);
     }
+    // 맘키즈 클럽 정보 수정 및 삭제하기
     @PutMapping("/{uuid}")
     public void updateClubUser(@RequestBody MomClubInputVo momClubInputVo, @PathVariable String uuid){
+        log.info("INPUT Object Data is : {}" , momClubInputVo);
         MomClubDto momClubDto = modelMapper.map(momClubInputVo, MomClubDto.class);
         momClubService.updateClubUser(momClubDto, uuid);
     }

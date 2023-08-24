@@ -2,7 +2,6 @@ package ssgssak.ssgpointappclub.domain.club.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import ssgssak.ssgpointappclub.domain.club.dto.CarClubDto;
 
 @Entity
 @Getter
