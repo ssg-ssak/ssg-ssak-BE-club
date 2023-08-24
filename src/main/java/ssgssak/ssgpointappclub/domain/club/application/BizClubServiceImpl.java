@@ -16,9 +16,7 @@ public class BizClubServiceImpl implements ClubService<BizClubDto> {
     private final ClubListRepository clubListRepository;
     private final ModelMapper modelMapper;
 
-    /*
-    유저 클럽 가입
-     */
+    // 유저 클럽 정보 생성
     @Override
     public void createClubUser(BizClubDto createDto, String uuid) {
         BizClub bizClub = BizClub.builder()
@@ -37,6 +35,7 @@ public class BizClubServiceImpl implements ClubService<BizClubDto> {
         clubList.updateBizClubInfo(bizClub);
         clubListRepository.save(clubList);
     }
+    // 유저 정보 가져오기
     @Override
     public BizClubDto getClubUser(String uuid) {
         ClubList clubList = clubListRepository.findByUuid(uuid);
@@ -47,6 +46,7 @@ public class BizClubServiceImpl implements ClubService<BizClubDto> {
                 .orElseThrow(() -> new IllegalArgumentException("해당 클럽이 존재하지 않습니다."));
         return modelMapper.map(bizClub, BizClubDto.class);
     }
+    // 유저 정보 삭제/수정
     @Override
     public void updateClubUser(BizClubDto updateDto, String uuid) {
         ClubList clubList = clubListRepository.findByUuid(uuid);

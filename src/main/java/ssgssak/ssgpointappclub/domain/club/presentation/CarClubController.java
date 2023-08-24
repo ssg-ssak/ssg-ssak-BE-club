@@ -21,7 +21,7 @@ public class CarClubController {
 
     // 차량 클럽 가입
     @PostMapping("/{uuid}")
-    public void createClubUser(@RequestBody CarClubInputVo carClubInputVo, @PathVariable String uuid){
+    public void joinClub(@RequestBody CarClubInputVo carClubInputVo, @PathVariable String uuid){
         log.info("INPUT Object Data is : {}" , carClubInputVo);
         CarClubDto carClubDto = modelMapper.map(carClubInputVo, CarClubDto.class);
         carClubService.createClubUser(carClubDto, uuid);
@@ -29,7 +29,7 @@ public class CarClubController {
 
     // 차량 클럽 정보 불러오기
     @GetMapping("/{uuid}")
-    public ResponseEntity<CarClubOutputVo> getClubUser(@PathVariable String uuid){
+    public ResponseEntity<CarClubOutputVo> getClubUserInfo(@PathVariable String uuid){
         log.info("INPUT UUID is : {}" , uuid);
         CarClubDto carClubDto = carClubService.getClubUser(uuid);
         log.info("OUTPUT carClubDto is : {}" , carClubDto);
@@ -40,7 +40,7 @@ public class CarClubController {
 
     // 차량 클럽 정보 수정 및 삭제하기
     @PutMapping("/{uuid}")
-    public void updateClubUser(@RequestBody CarClubInputVo carClubInputVo, @PathVariable String uuid){
+    public void updateClubUserInfo(@RequestBody CarClubInputVo carClubInputVo, @PathVariable String uuid){
         log.info("INPUT Object Data is : {}" , carClubInputVo);
         CarClubDto carClubDto = modelMapper.map(carClubInputVo, CarClubDto.class);
         carClubService.updateClubUser(carClubDto, uuid);

@@ -14,16 +14,16 @@ public class BeautyClubController {
 
     // 뷰티 클럽 가입
     @PostMapping("/{uuid}")
-    public void createClubUser(@PathVariable String uuid){
+    public void joinClub(@PathVariable String uuid){
         log.info("uuid is : {}" , uuid);
         beautyClubService.createClubUser(uuid);
     }
 
     // 뷰티 클럽 가입 여부 확인
     @GetMapping("/{uuid}")
-    public Boolean getClubUser(@PathVariable String uuid){
+    public Boolean isClubUser(@PathVariable String uuid){
         log.info("uuid is : {}" , uuid);
-        if(beautyClubService.getClubUser(uuid)) {
+        if(beautyClubService.isBeautyClubUser(uuid)) {
             log.info("뷰티 클럽 가입 여부 : {}" , "가입되어있음");
             return true;
         }
@@ -35,7 +35,7 @@ public class BeautyClubController {
 
     // 뷰티 클럽 탈퇴
     @PutMapping("/{uuid}")
-    public void deleteClubUser(@PathVariable String uuid){
+    public void leaveClub(@PathVariable String uuid){
         log.info("uuid is : {}" , uuid);
         beautyClubService.deleteClubUser(uuid);
     }
