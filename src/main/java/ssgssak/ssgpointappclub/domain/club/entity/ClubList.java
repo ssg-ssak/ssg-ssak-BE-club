@@ -23,6 +23,8 @@ public class ClubList {
     private MomClub momClub;
     @ManyToOne(fetch = FetchType.LAZY)
     private CarClub carClub;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private BeautyClub beautyClub;
 
     // 비즈니스 클럽 정보 수정
     public void updateBizClubInfo(BizClub bizClub){
@@ -34,7 +36,13 @@ public class ClubList {
         this.momClub = momClub;
     }
 
+    // 차량관리 클럽 정보 수정
     public void updateCarClubInfo(CarClub carClub) {
         this.carClub = carClub;
+    }
+
+    // 뷰티 클럽 정보 수정
+    public void updateBeautyClubInfo(BeautyClub beautyClub) {
+        this.beautyClub = beautyClub;
     }
 }
