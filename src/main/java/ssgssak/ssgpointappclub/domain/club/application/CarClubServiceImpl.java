@@ -16,7 +16,7 @@ public class CarClubServiceImpl implements ClubService<CarClubDto>{
     private final ClubListRepository clubListRepository;
     private final ModelMapper modelMapper;
 
-    // 유저 클럽 가입
+    // 유저 클럽 정보 생성
     @Override
     public void createClubUser(CarClubDto createDto, String uuid) {
         CarClub carClub = CarClub.builder()

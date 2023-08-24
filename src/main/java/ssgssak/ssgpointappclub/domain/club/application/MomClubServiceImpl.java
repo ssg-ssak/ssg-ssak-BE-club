@@ -22,6 +22,7 @@ public class MomClubServiceImpl implements ClubService<MomClubDto>{
     // VO에서 받아온 String을 LocalDate로 변환.
     private static final DateTimeFormatter stringToDate = DateTimeFormatter.ofPattern("yyyyMMdd");
 
+    // 유저 클럽 정보 생성
     @Override
     public void createClubUser(MomClubDto createDto, String uuid) {
         MomClub momClub = null;
@@ -55,6 +56,7 @@ public class MomClubServiceImpl implements ClubService<MomClubDto>{
         clubList.updateMomClubInfo(momClub);
         clubListRepository.save(clubList);
     }
+    // 유저 클럽 정보 가져오기
     @Override
     public MomClubDto getClubUser(String uuid) {
         /*
@@ -66,7 +68,7 @@ public class MomClubServiceImpl implements ClubService<MomClubDto>{
                 .orElseThrow(() -> new IllegalArgumentException("해당 클럽이 존재하지 않습니다."));
         return modelMapper.map(momClub, MomClubDto.class);
     }
-
+    // 유저 클럽 정보 수정/삭제
     @Override
     public void updateClubUser(MomClubDto updateDto, String uuid) {
         /*
