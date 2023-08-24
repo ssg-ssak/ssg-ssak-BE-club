@@ -39,8 +39,4 @@ public class MomClub {
         this.child2Gender = child2Gender;
         this.child2Birth = child2Birth;
     }
-
-    public void updateAgreement(Boolean agreement){
-        this.agreement = agreement;
-    }
 }

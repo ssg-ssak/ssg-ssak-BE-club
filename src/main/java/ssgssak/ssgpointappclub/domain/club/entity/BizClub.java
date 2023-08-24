@@ -24,23 +24,4 @@ public class BizClub {
     private String companyEmail;
     @Column(nullable = false, name = "agreement")
     private Boolean agreement;
-
-    public void updateCompanyName(String companyName){
-        this.companyName = companyName;
-    }
-    public void updateCompanyNumber(String companyNumber){
-        this.companyNumber = companyNumber;
-    }
-    public void updateCompanyLeaderName(String CompanyLeaderName){
-        this.companyLeaderName = companyLeaderName;
-    }
-    public void updateCompanyAddress(String companyAddress){
-        this.companyAddress = companyAddress;
-    }
-    public void updateCompanyEmail(String companyEmail){
-        this.companyEmail = companyEmail;
-    }
-    public void updateAgreement(Boolean agreement) {
-        this.agreement = agreement;
-    }
 }

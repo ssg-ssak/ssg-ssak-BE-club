@@ -6,8 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import ssgssak.ssgpointappclub.domain.club.entity.RegionType;
 
+@Builder
 @Getter
-public class CarClubInputVo {
+@AllArgsConstructor
+@NoArgsConstructor
+public class CarClubOutputVo {
     // 차량 번호판의 지역
     private RegionType region;
     private String firstNumber;

@@ -40,8 +40,4 @@ public enum RegionType {
     RegionType(String region) {
         this.region = region;
     }
-
-    public String region(){
-        return region;
-    }
 }
