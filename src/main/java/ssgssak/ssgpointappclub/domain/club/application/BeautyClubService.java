@@ -1,7 +1,6 @@
 package ssgssak.ssgpointappclub.domain.club.application;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ssgssak.ssgpointappclub.domain.club.entity.BeautyClub;
 import ssgssak.ssgpointappclub.domain.club.entity.ClubList;

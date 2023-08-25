@@ -6,16 +6,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ssgssak.ssgpointappclub.domain.club.application.ClubListService;
 import ssgssak.ssgpointappclub.domain.club.application.ClubListServiceImpl;
-import ssgssak.ssgpointappclub.domain.club.entity.ClubList;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/club")
 @Slf4j
 public class ClubListController {
-    ClubListServiceImpl clubListService;
+    private final ClubListServiceImpl clubListService;
 
     /*
     User 생성 시에 uuid 필드값만 지니고 나머지 필드값은 null인 ClubList를 생성한다.

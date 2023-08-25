@@ -1,6 +1,5 @@
 package ssgssak.ssgpointappclub.domain.club.dto;
 
-import jakarta.annotation.Nullable;
 import lombok.*;
 
 @Getter
