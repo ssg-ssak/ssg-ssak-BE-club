@@ -8,6 +8,7 @@ import lombok.*;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class BizClub {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

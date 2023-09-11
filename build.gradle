@@ -33,8 +33,6 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	// Model Mapper
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.0.0'
-	// security 설정을 위한 webflux
-	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	// jwt 설정
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5',

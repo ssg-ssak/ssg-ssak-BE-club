@@ -9,6 +9,7 @@ import ssgssak.ssgpointappclub.global.common.entity.BaseTimeEntity;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString
 public class ClubList extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
