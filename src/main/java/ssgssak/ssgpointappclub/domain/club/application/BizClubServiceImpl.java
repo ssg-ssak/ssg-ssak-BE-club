@@ -19,6 +19,11 @@ public class BizClubServiceImpl implements ClubService<BizClubDto> {
     // 유저 클럽 정보 생성
     @Override
     public void createClubUser(BizClubDto createDto, String uuid) {
+        // 가입되어있는지 확인(중복 가입 방지)
+        ClubList clubList = clubListRepository.findByUuid(uuid);
+        if(clubList.getBizClub() != null) {
+            throw new IllegalArgumentException("이미 클럽에 가입되어 있습니다.");
+        }
         BizClub bizClub = BizClub.builder()
                 .companyName(createDto.getCompanyName())
                 .companyNumber(createDto.getCompanyNumber())
@@ -31,7 +36,6 @@ public class BizClubServiceImpl implements ClubService<BizClubDto> {
         /*
         clubList의 BizClub필드에 생성한 bizClub 추가
          */
-        ClubList clubList = clubListRepository.findByUuid(uuid);
         clubList.updateBizClubInfo(bizClub);
         clubListRepository.save(clubList);
     }

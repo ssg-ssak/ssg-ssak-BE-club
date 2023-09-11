@@ -25,6 +25,12 @@ public class MomClubServiceImpl implements ClubService<MomClubDto>{
     // 유저 클럽 정보 생성
     @Override
     public void createClubUser(MomClubDto createDto, String uuid) {
+        // 가입되어있는지 확인(중복 가입 방지)
+        ClubList clubList = clubListRepository.findByUuid(uuid);
+        if(clubList.getMomClub() != null) {
+            throw new IllegalArgumentException("이미 클럽에 가입되어 있습니다.");
+        }
+
         MomClub momClub = null;
         /*
         Child2 정보의 유무에 따라 분기
@@ -52,7 +58,6 @@ public class MomClubServiceImpl implements ClubService<MomClubDto>{
         /*
         clubList의 MomClub필드에 생성한 momClub 추가
          */
-        ClubList clubList = clubListRepository.findByUuid(uuid);
         clubList.updateMomClubInfo(momClub);
         clubListRepository.save(clubList);
     }
