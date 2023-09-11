@@ -2,11 +2,15 @@ package ssgssak.ssgpointappclub.domain.club.presentation;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import ssgssak.ssgpointappclub.domain.club.application.ClubListServiceImpl;
+import ssgssak.ssgpointappclub.domain.club.dto.ClubListDto;
+import ssgssak.ssgpointappclub.domain.club.vo.ClubListOutputVo;
+
+import java.security.Principal;
 
 @RestController
 @RequiredArgsConstructor
@@ -14,13 +18,32 @@ import ssgssak.ssgpointappclub.domain.club.application.ClubListServiceImpl;
 @Slf4j
 public class ClubListController {
     private final ClubListServiceImpl clubListService;
+    private final ModelMapper modelMapper;
+
+    //todo: 각 클럽별로 중복가입 방지 로직 추가하기
+    /*
+    아래는 어드민 API
+    1. User 생성 시에 uuid 필드값만 지니고 나머지 필드값은 null인 ClubList를 생성한다.
+     */
+
+    // 1. User 생성 시에 uuid 필드값만 지니고 나머지 필드값은 null인 ClubList를 생성한다.
+    @PostMapping("admin/clublist")
+    public void createUserClubList(Principal principal){
+        log.info("INPUT uuid is : {}", principal.getName());
+        clubListService.createClubList(principal.getName());
+    }
+
 
     /*
-    User 생성 시에 uuid 필드값만 지니고 나머지 필드값은 null인 ClubList를 생성한다.
+    아래는 유저 API
+    1. 마이 클럽 보여주기(클럽 카테고리로 이동할 시)
      */
-    @PostMapping("/clublist/{uuid}")
-    public void createUserClubList(@PathVariable String uuid){
-        log.info("INPUT uuid is : {}", uuid);
-        clubListService.createClubList(uuid);
+    // 1. 마이 클럽 보여주기(클럽 카테고리로 이동할 시)
+    @GetMapping("/clublist")
+    public ResponseEntity<ClubListOutputVo> getMyClubList(Principal principal){
+        log.info("INPUT uuid is : {}", principal.getName());
+        ClubListDto clubListDto = clubListService.getMyClubList(principal.getName());
+        ClubListOutputVo clubListOutputVo = modelMapper.map(clubListDto, ClubListOutputVo.class);
+        return new ResponseEntity<>(clubListOutputVo, HttpStatus.OK);
     }
 }
