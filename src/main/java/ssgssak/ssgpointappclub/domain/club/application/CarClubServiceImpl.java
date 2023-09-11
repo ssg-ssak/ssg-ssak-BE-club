@@ -19,6 +19,11 @@ public class CarClubServiceImpl implements ClubService<CarClubDto>{
     // 유저 클럽 정보 생성
     @Override
     public void createClubUser(CarClubDto createDto, String uuid) {
+        // 가입되어있는지 확인(중복 가입 방지)
+        ClubList clubList = clubListRepository.findByUuid(uuid);
+        if(clubList.getCarClub() != null){
+            throw new IllegalArgumentException("이미 클럽에 가입되어 있습니다.");
+        }
         CarClub carClub = CarClub.builder()
                 .region(createDto.getRegion())
                 .firstNumber(createDto.getFirstNumber())
@@ -28,8 +33,6 @@ public class CarClubServiceImpl implements ClubService<CarClubDto>{
                 .agreementOptional(createDto.getAgreementOptional())
                 .build();
         carClubRepository.save(carClub);
-
-        ClubList clubList = clubListRepository.findByUuid(uuid);
         clubList.updateCarClubInfo(carClub);
         clubListRepository.save(clubList);
     }

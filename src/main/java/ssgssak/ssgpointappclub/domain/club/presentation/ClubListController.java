@@ -20,7 +20,6 @@ public class ClubListController {
     private final ClubListServiceImpl clubListService;
     private final ModelMapper modelMapper;
 
-    //todo: 각 클럽별로 중복가입 방지 로직 추가하기
     /*
     아래는 어드민 API
     1. User 생성 시에 uuid 필드값만 지니고 나머지 필드값은 null인 ClubList를 생성한다.
