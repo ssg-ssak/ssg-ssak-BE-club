@@ -6,28 +6,28 @@ spring:
     activate:
       on-profile: local
 
-jpa:
-  hibernate:
-    ddl-auto: update
-    format_sql: true
-  show-sql: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+      format_sql: true
+    show-sql: true
 
-# Replication 설정
-datasource:
-  master:
-    hikari:
-      jdbc-url: jdbc:mysql://localhost:3306/ssgclub
-      read-only: false
-      username: root
-      password: 1234
-      driver-class-name: com.mysql.cj.jdbc.Driver
-  slave:
-    hikari:
-      jdbc-url: jdbc:mysql://localhost:3306/ssgclub
-      read-only: true
-      username: root
-      password: 1234
-      driver-class-name: com.mysql.cj.jdbc.Driver
+  # Replication 설정
+  datasource:
+    master:
+      hikari:
+        jdbc-url: jdbc:mysql://localhost:3306/ssgclub
+        read-only: false
+        username: root
+        password: 1234
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    slave:
+      hikari:
+        jdbc-url: jdbc:mysql://localhost:3306/ssgclub
+        read-only: true
+        username: root
+        password: 1234
+        driver-class-name: com.mysql.cj.jdbc.Driver
 
 
 
