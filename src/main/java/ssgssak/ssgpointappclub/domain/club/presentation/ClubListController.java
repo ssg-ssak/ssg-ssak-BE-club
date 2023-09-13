@@ -26,7 +26,7 @@ public class ClubListController {
      */
 
     // 1. User 생성 시에 uuid 필드값만 지니고 나머지 필드값은 null인 ClubList를 생성한다.
-    @PostMapping("admin/clublist")
+    @PostMapping("/admin/clublist")
     public void createUserClubList(Principal principal){
         log.info("INPUT uuid is : {}", principal.getName());
         clubListService.createClubList(principal.getName());
