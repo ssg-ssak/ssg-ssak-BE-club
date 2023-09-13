@@ -1,0 +1,59 @@
+# 여기서 java와 spring에 대한 설정을 진행한다
+version: "3"
+services:
+  # master DB 설정
+  db-master:
+    # 이미지화 시키기 전에는 build를 사용
+    build:
+      context: ./
+      dockerfile: master/Dockerfile
+    #    # 이미지화 시킨 이후에는 image를 사용
+    #    image: hwan0518/ssgpoint_user_db_master:1.0.0
+    restart: always
+    platform: linux/x86_64
+    environment:
+      MYSQL_DATABASE: 'ssgpoint'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: '1234'
+      MYSQL_ROOT_PASSWORD: '1234'
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    ports:
+      - '3310:3306'
+    container_name: master-db
+    volumes:
+      - my-db-master:/var/lib/mysql
+      - my-db-master:/var/lib/mysql-files
+    networks:
+      - net-ssg-mysql
+  # slave DB 설정
+  db-slave:
+    build:
+      context: ./
+      dockerfile: slave/Dockerfile
+    #    image: hwan0518/ssgpoint_user_db_slave:1.0.0
+    restart: always
+    platform: linux/x86_64
+    environment:
+      MYSQL_DATABASE: 'ssgpoint'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: '1234'
+      MYSQL_ROOT_PASSWORD: '1234'
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    ports:
+      - '3311:3306'
+    container_name: slave-db
+    volumes:
+      - my-db-slave:/var/lib/mysql
+      - my-db-slave:/var/lib/mysql-files
+    networks:
+      - net-ssg-mysql
+volumes:
+  my-db-master:
+  my-db-slave:
+networks:
+  net-ssg-mysql:
+    driver: bridge
