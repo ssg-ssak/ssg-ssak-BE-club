@@ -16,14 +16,14 @@ spring:
   datasource:
     master:
       hikari:
-        jdbc-url: ${MASTER_DB_URL}
+        jdbc-url: jdbc:mysql://15.164.17.12:3310/ssgclub?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
         read-only: false
         username: ${MASTER_DB_USERNAME}
         password: ${MASTER_DB_PASSWORD}
         driver-class-name: com.mysql.cj.jdbc.Driver
     slave:
       hikari:
-        jdbc-url: ${SLAVE_DB_URL}
+        jdbc-url: jdbc:mysql://15.164.17.12:3311/ssgclub?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
         read-only: true
         username: ${SLAVE_DB_USERNAME}
         password: ${SLAVE_DB_PASSWORD}
