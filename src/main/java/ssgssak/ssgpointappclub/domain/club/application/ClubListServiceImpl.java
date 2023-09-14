@@ -1,7 +1,6 @@
 package ssgssak.ssgpointappclub.domain.club.application;
 
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import ssgssak.ssgpointappclub.domain.club.dto.ClubListDto;
 import ssgssak.ssgpointappclub.domain.club.entity.ClubList;
@@ -9,7 +8,6 @@ import ssgssak.ssgpointappclub.domain.club.infrastructure.ClubListRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -59,6 +57,7 @@ public class ClubListServiceImpl implements ClubListService{
         return ClubListDto.builder().myClubList(myClubList).build();
     }
 
+    // 3. 해당 uuid의 유저가 가입한 클럽리스트 데이터 삭제
     @Override
     public void deleteClubList(String uuid) {
         ClubList clubList = clubListRepository.findByUuid(uuid);
