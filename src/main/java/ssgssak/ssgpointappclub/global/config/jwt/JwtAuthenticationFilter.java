@@ -30,7 +30,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         log.info("authHeader is : {}", authHeader);
         // 헤더가 null이거나, "Bearer"로 시작하지 않는다면 토큰 인증을 진행하지 않음
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            filterChain.doFilter(request, response); //todo:임시
+//            filterChain.doFilter(request, response); //todo:임시
             throw new TokenExpiredException();
         }
 
