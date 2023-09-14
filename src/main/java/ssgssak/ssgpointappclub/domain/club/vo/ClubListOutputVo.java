@@ -1,9 +1,6 @@
 package ssgssak.ssgpointappclub.domain.club.vo;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ssgssak.ssgpointappclub.domain.club.entity.BeautyClub;
 import ssgssak.ssgpointappclub.domain.club.entity.BizClub;
 import ssgssak.ssgpointappclub.domain.club.entity.CarClub;
@@ -16,6 +13,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class ClubListOutputVo {
     private List<HashMap<String, Boolean>> myClubList;
 }

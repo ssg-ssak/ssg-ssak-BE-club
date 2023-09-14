@@ -42,7 +42,9 @@ public class ClubListController {
     public ResponseEntity<ClubListOutputVo> getMyClubList(Principal principal){
         log.info("INPUT uuid is : {}", principal.getName());
         ClubListDto clubListDto = clubListService.getMyClubList(principal.getName());
+        log.info("OUTPUT clubListDto is : {}", clubListDto);
         ClubListOutputVo clubListOutputVo = modelMapper.map(clubListDto, ClubListOutputVo.class);
+        log.info("OUTPUT clubListOutputVo is : {}", clubListOutputVo);
         return new ResponseEntity<>(clubListOutputVo, HttpStatus.OK);
     }
 }

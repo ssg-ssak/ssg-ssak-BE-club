@@ -1,9 +1,6 @@
 package ssgssak.ssgpointappclub.domain.club.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +9,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class ClubListDto {
     private List<HashMap<String, Boolean>> myClubList;
 }

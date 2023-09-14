@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -16,6 +17,7 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtTokenProvider jwtTokenProvider;
 
@@ -25,6 +27,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String jwt;  // header에서 가져올 jwt 토큰값임. jwt 토큰값은 Header, Payload, Signature가 '.' 으로 구분된 문자열 값임
         final String uuid; // uuid를 토큰에서 가져올것임
 
+        log.info("authHeader is : {}", authHeader);
         // 헤더가 null이거나, "Bearer"로 시작하지 않는다면 토큰 인증을 진행하지 않음
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             throw new TokenExpiredException();
@@ -33,7 +36,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // 토큰 인증 진행
         jwt = authHeader.substring(7); // "Bearer " 뒷부분이 모두 jwt 토큰임
         uuid = jwtTokenProvider.getUUID(jwt);    // 토큰에서 uuid를 추출
-
+        log.info("jwt is : {}", jwt);
+        log.info("uuid is : {}", uuid);
         // 만약 loginId가 null이 아니고, SecurityContextHolder에 authentication이 없고, 토큰이 유효성 검사를 통과했다면 authentication 생성
         if (uuid != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             // 여기서 credentials는 필요하다면 추가적으로 인증을 설정할 요소이다. credentials를 사용하지 않더라도 null을 입력해주어야한다
