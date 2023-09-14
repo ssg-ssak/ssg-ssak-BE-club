@@ -58,4 +58,10 @@ public class ClubListServiceImpl implements ClubListService{
         myClubList.add(clubMap);
         return ClubListDto.builder().myClubList(myClubList).build();
     }
+
+    @Override
+    public void deleteClubList(String uuid) {
+        ClubList clubList = clubListRepository.findByUuid(uuid);
+        clubListRepository.delete(clubList);
+    }
 }

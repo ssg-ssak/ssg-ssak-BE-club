@@ -8,4 +8,6 @@ import java.util.List;
 public interface ClubListService {
     void createClubList(String uuid);
     ClubListDto getMyClubList(String uuid);
+
+    void deleteClubList(String uuid);
 }

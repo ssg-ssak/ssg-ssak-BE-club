@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ssgssak.ssgpointappclub.domain.club.application.ClubListServiceImpl;
 import ssgssak.ssgpointappclub.domain.club.dto.ClubListDto;
@@ -16,6 +17,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/club")
 @Slf4j
+@Transactional
 public class ClubListController {
     private final ClubListServiceImpl clubListService;
     private final ModelMapper modelMapper;
@@ -32,12 +34,20 @@ public class ClubListController {
         clubListService.createClubList(principal.getName());
     }
 
+    // 2. clubList데이터 삭제
+    @PutMapping("/admin/clublist")
+    public void deleteUserClubList(Principal principal){
+        log.info("INPUT uuid is : {}", principal.getName());
+        clubListService.deleteClubList(principal.getName());
+    }
+
 
     /*
     아래는 유저 API
     1. 마이 클럽 보여주기(클럽 카테고리로 이동할 시)
      */
     // 1. 마이 클럽 보여주기(클럽 카테고리로 이동할 시)
+    @Transactional(readOnly = true)
     @GetMapping("/clublist")
     public ResponseEntity<ClubListOutputVo> getMyClubList(Principal principal){
         log.info("INPUT uuid is : {}", principal.getName());
