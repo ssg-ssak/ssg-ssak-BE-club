@@ -17,8 +17,6 @@ import java.security.Principal;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/club")
 @Slf4j
-@Transactional
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ClubListController {
     private final ClubListServiceImpl clubListService;
     private final ModelMapper modelMapper;
@@ -49,7 +47,6 @@ public class ClubListController {
     1. 마이 클럽 보여주기(클럽 카테고리로 이동할 시)
      */
     // 1. 마이 클럽 보여주기(클럽 카테고리로 이동할 시)
-    @Transactional(readOnly = true)
     @GetMapping("/clublist")
     public ResponseEntity<ClubListOutputVo> getMyClubList(Principal principal){
         log.info("INPUT uuid is : {}", principal.getName());
