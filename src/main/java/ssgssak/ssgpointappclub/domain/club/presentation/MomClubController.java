@@ -16,6 +16,7 @@ import java.security.Principal;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/v1/club/mom-kids")
 public class MomClubController {
     private final MomClubServiceImpl momClubService;

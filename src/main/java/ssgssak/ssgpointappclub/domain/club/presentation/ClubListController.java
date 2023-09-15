@@ -18,6 +18,7 @@ import java.security.Principal;
 @RequestMapping("/api/v1/club")
 @Slf4j
 @Transactional
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ClubListController {
     private final ClubListServiceImpl clubListService;
     private final ModelMapper modelMapper;

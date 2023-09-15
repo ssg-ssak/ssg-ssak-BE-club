@@ -49,7 +49,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeHttpRequest -> authorizeHttpRequest
                         .requestMatchers(org.springframework.web.cors.CorsUtils::isPreFlightRequest)
                         .permitAll()
-                        .requestMatchers("/api/v1/auth/sign-up","/api/v1/auth/log-in", "/swagger-ui/**", "/swagger-resources/**", "/api-docs/**")
+                        .requestMatchers("/api/v1/**","/swagger-ui/**", "/swagger-resources/**", "/api-docs/**")
                         .permitAll() // 위의 url은 모두 filter를 거치지 않음
                         .anyRequest().authenticated()) // 위의 url을 제외한 모든 url은 필터를 거쳐야함
                 // 폼 로그인 사용 안함
