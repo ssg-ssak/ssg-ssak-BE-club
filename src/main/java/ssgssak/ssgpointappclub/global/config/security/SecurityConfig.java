@@ -17,7 +17,7 @@ import ssgssak.ssgpointappclub.global.config.jwt.JwtAuthenticationFilter;
 import java.util.List;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
