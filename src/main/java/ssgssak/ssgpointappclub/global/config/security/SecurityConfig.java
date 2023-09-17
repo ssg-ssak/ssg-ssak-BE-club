@@ -37,7 +37,7 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer configure(){
         return (web) -> web.ignoring()
-                .requestMatchers(HttpMethod.OPTIONS, "/**")
+//                .requestMatchers(HttpMethod.OPTIONS, "/**")
                 .requestMatchers("/static/**");
     }
 
