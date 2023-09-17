@@ -10,7 +10,6 @@ import java.security.Principal;
 @RestController
 @RequestMapping("/api/v1/club/beauty")
 @Slf4j
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequiredArgsConstructor
 public class BeautyClubController {
     private final BeautyClubService beautyClubService;
