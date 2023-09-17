@@ -16,7 +16,6 @@ import java.security.Principal;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/v1/club/car")
 public class CarClubController {
     private final CarClubServiceImpl carClubService;
